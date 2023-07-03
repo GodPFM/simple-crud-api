@@ -1,7 +1,7 @@
 import { EventEmmit, IUser } from '../../types/types';
 import { checkMessage, parseMessage } from '../../utils/utils';
-import { users } from '../../database/database';
 import { v4 } from 'uuid';
+import { database } from '../../main';
 
 export const postHandler = async (args: EventEmmit) => {
   const { req, res, url } = args;
@@ -18,7 +18,7 @@ export const postHandler = async (args: EventEmmit) => {
         id: uuid,
         ...parsedMessage,
       };
-      users.push(newUser as IUser);
+      database.addUser(newUser as IUser);
       res.writeHead(201, { 'Content-Type': 'application/json' });
       res.write(JSON.stringify(parsedMessage));
     }

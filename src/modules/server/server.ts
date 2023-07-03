@@ -5,6 +5,7 @@ import { EventEmitter } from 'node:events';
 import { EventEmmit } from '../../types/types';
 import { getHandler } from '../handlers/getHandler';
 import { postHandler } from '../handlers/postHandler';
+import { putHandler } from '../handlers/putHandler';
 
 type ServerEvents = 'GET' | 'PUT' | 'POST' | 'DELETE';
 export type ServerInstance = InstanceType<typeof Server>;
@@ -34,6 +35,9 @@ export default class Server extends EventEmitter {
             break;
           case 'POST':
             await postHandler({ req, res, url: requestURL });
+            break;
+          case 'PUT':
+            await putHandler({ req, res, url: requestURL });
             break;
         }
       } else {

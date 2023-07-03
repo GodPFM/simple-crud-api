@@ -1,5 +1,6 @@
-import { users } from '../database/database';
 import http from 'http';
+import { IUser } from '../types/types';
+import { database } from '../main';
 
 export const isValidRequest = (method?: string, url?: string): boolean => {
   if (method && url) {
@@ -11,6 +12,7 @@ export const isValidRequest = (method?: string, url?: string): boolean => {
 };
 
 export const getUserById = (uuid: string) => {
+  const users = database.getUsers();
   return users.find((user) => user.id === uuid);
 };
 
@@ -33,7 +35,6 @@ export const parseMessage = async (req: http.IncomingMessage) => {
 };
 
 export const checkMessage = (message?: unknown) => {
-  console.log(message);
   if (message && typeof message === 'object') {
     if ('username' in message && typeof message.username === 'string') {
       if ('age' in message && typeof message.age === 'number') {
@@ -50,4 +51,17 @@ export const checkMessage = (message?: unknown) => {
     }
   }
   return false;
+};
+
+export const updateUser = (id: string, newData: Omit<IUser, 'id'>) => {
+  const users = database.getUsers();
+  const newUsers = users.reduce((acc, user) => {
+    if (user.id !== id) {
+      acc.push(user);
+    } else {
+      acc.push({ id, ...newData });
+    }
+    return acc;
+  }, [] as IUser[]);
+  database.updateUsers(newUsers);
 };

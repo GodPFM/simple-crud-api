@@ -1,13 +1,14 @@
 import { EventEmmit } from '../../types/types';
-import { users } from '../../database/database';
 import { validate } from 'uuid';
 import { getUserById } from '../../utils/utils';
+import { database } from '../../main';
 
 export const getHandler = (args: EventEmmit) => {
   const { res, url } = args;
   const splitURL = url.split('/').filter((item) => item);
   const id = splitURL.at(-1);
-  if (splitURL.length === 2 && url === '/api/users') {
+  if (splitURL.length === 2 && url.includes('/api/users')) {
+    const users = database.getUsers();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.write(
       JSON.stringify({
