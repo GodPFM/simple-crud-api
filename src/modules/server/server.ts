@@ -43,10 +43,15 @@ export default class Server extends EventEmitter {
           case 'DELETE':
             await deleteHandler({ req, res, url: requestURL });
             break;
+          default:
+            res.writeHead(404, { 'Content-Type': 'application/json' });
+            res.write(JSON.stringify('Method is not ready'));
+            res.end();
+            break;
         }
       } else {
-        res.writeHead(404, { 'Content-Type': 'application/json' });
-        res.write(JSON.stringify('Invalid request'));
+        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.write(JSON.stringify('Attempt to access a non-existent resource'));
         res.end();
       }
     });

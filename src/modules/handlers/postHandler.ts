@@ -24,7 +24,11 @@ export const postHandler = async (args: EventEmmit) => {
     }
   } else {
     res.writeHead(500, { 'Content-Type': 'application/json' });
-    res.write(JSON.stringify('Invalid request'));
+    res.write(
+      JSON.stringify(
+        'Invalid request or attempt to access a non-existent resource',
+      ),
+    );
   }
   res.end();
 };
