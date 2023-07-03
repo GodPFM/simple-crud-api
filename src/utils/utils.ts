@@ -40,7 +40,6 @@ export const checkMessage = (message?: unknown) => {
       if ('age' in message && typeof message.age === 'number') {
         if ('hobbies' in message && Array.isArray(message.hobbies)) {
           for (const item of message.hobbies) {
-            console.log(item);
             if (typeof item !== 'string') {
               return false;
             }

@@ -23,6 +23,5 @@ export class Users {
 
   updateUsers(newData: IUser[]) {
     this.users = newData;
-    console.log(this.users);
   }
 }
