@@ -46,7 +46,7 @@ export default class Server {
             break;
         }
       } else {
-        res.writeHead(500, { 'Content-Type': 'application/json' });
+        res.writeHead(404, { 'Content-Type': 'application/json' });
         res.write(JSON.stringify('Attempt to access a non-existent resource'));
         res.end();
       }

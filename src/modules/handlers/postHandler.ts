@@ -20,7 +20,7 @@ export const postHandler = async (args: EventEmmit) => {
       };
       database.addUser(newUser as IUser);
       res.writeHead(201, { 'Content-Type': 'application/json' });
-      res.write(JSON.stringify(parsedMessage));
+      res.write(JSON.stringify(newUser));
     }
   } else {
     res.writeHead(500, { 'Content-Type': 'application/json' });

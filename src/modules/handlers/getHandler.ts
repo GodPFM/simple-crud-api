@@ -18,6 +18,7 @@ export const getHandler = (args: EventEmmit) => {
   } else if (splitURL.length === 3) {
     if (id) {
       const isUuid = validate(id);
+      console.log(isUuid);
       if (isUuid) {
         const user = getUserById(id);
         if (user !== undefined) {
