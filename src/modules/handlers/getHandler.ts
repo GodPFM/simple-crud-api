@@ -8,7 +8,6 @@ export const getHandler = (args: EventEmmit) => {
   const splitURL = url.split('/').filter((item) => item);
   const id = splitURL.at(-1);
   if (splitURL.length === 2 && url === '/api/users') {
-    console.log('data sold');
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.write(
       JSON.stringify({
@@ -36,6 +35,9 @@ export const getHandler = (args: EventEmmit) => {
         res.write(JSON.stringify('Invalid id'));
       }
     }
+  } else {
+    res.writeHead(500, { 'Content-Type': 'application/json' });
+    res.write(JSON.stringify('Invalid request'));
   }
   res.end();
 };

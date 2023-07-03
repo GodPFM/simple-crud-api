@@ -4,6 +4,7 @@ import { isValidRequest } from '../../utils/utils';
 import { EventEmitter } from 'node:events';
 import { EventEmmit } from '../../types/types';
 import { getHandler } from '../handlers/getHandler';
+import { postHandler } from '../handlers/postHandler';
 
 type ServerEvents = 'GET' | 'PUT' | 'POST' | 'DELETE';
 export type ServerInstance = InstanceType<typeof Server>;
@@ -22,7 +23,7 @@ export default class Server extends EventEmitter {
   }
 
   createServer() {
-    this.server = http.createServer((req, res) => {
+    this.server = http.createServer(async (req, res) => {
       const requestMethod = req.method;
       const requestURL = req.url;
       const validateRequest = isValidRequest(requestMethod, requestURL);
@@ -31,15 +32,15 @@ export default class Server extends EventEmitter {
           case 'GET':
             getHandler({ req, res, url: requestURL });
             break;
+          case 'POST':
+            await postHandler({ req, res, url: requestURL });
+            break;
         }
       } else {
         res.writeHead(404, { 'Content-Type': 'application/json' });
         res.write(JSON.stringify('Invalid request'));
         res.end();
       }
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end();
-      console.log(requestURL, requestMethod);
     });
 
     this.server.listen(this.PORT, () =>
