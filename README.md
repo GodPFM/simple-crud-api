@@ -5,12 +5,13 @@
     git checkout dev
     npm install
 ### To start app in dev mode
-    npm run dev
+    npm run start:dev
 ### To start in production mode
     npm run start:prod
 ### To start in multi mode
     npm run start:multi
 ### To start tests
+    npm run start:dev
     npm run test
 ### Port
 You can change port in .env file

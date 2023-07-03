@@ -20,7 +20,7 @@ export const putHandler = async (args: EventEmmit) => {
         const user = getUserById(id);
         if (user) {
           updateUser(id, parsedMessage as Omit<IUser, 'id'>);
-          res.writeHead(201, { 'Content-Type': 'application/json' });
+          res.writeHead(200, { 'Content-Type': 'application/json' });
           res.write(JSON.stringify('User updated'));
         } else {
           res.writeHead(404, { 'Content-Type': 'application/json' });

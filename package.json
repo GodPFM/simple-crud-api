@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "dev": "npx nodemon",
+    "start:dev": "npx nodemon",
     "start:prod": "npx tsc && node dist/main.js",
     "start:multi": "npx tsc && node dist/main.js -- --multi",
     "format": "prettier --write \"src/**/*.ts\"",
