@@ -1,6 +1,7 @@
 {
   "scripts": {
     "dev": "npx nodemon",
+    "start:prod": "npx tsc && node dist/main.js",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "eslint \"src/**/*.ts\" --fix",
     "test": "jest --silent",
