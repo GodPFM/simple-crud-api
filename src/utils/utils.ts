@@ -65,3 +65,14 @@ export const updateUser = (id: string, newData: Omit<IUser, 'id'>) => {
   }, [] as IUser[]);
   database.updateUsers(newUsers);
 };
+
+export const deleteUser = (id: string) => {
+  const users = database.getUsers();
+  const updatedList = users.reduce((acc, user) => {
+    if (user.id !== id) {
+      acc.push(user);
+    }
+    return acc;
+  }, [] as IUser[]);
+  database.updateUsers(updatedList);
+};
